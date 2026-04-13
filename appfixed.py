@@ -124,7 +124,7 @@ def train_model(df_in, split_date, drawdown_threshold, forward_window):
 
     scale_pos_weight = (y_train==0).sum() / max((y_train==1).sum(), 1)
 
-     model = XGBClassifier(
+    model = XGBClassifier(
       n_estimators=50, max_depth=2, learning_rate=0.02,
       subsample=0.6, colsample_bytree=0.6,
       min_child_weight=30, reg_alpha=2.0, reg_lambda=5.0,
