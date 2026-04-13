@@ -125,12 +125,13 @@ def train_model(df_in, split_date, drawdown_threshold, forward_window):
     scale_pos_weight = (y_train==0).sum() / max((y_train==1).sum(), 1)
 
     model = XGBClassifier(
-        n_estimators=100, max_depth=3, learning_rate=0.03,
-        subsample=0.7, colsample_bytree=0.7,
-        min_child_weight=10, reg_alpha=0.5, reg_lambda=2.0,
-        scale_pos_weight=scale_pos_weight,
-        eval_metric='auc', random_state=42, n_jobs=-1,
-    )
+      n_estimators=50, max_depth=2, learning_rate=0.02,
+      subsample=0.6, colsample_bytree=0.6,
+      min_child_weight=30, reg_alpha=2.0, reg_lambda=5.0,
+      gamma=1.0,
+      scale_pos_weight=scale_pos_weight,
+      eval_metric='auc', random_state=42, n_jobs=-1,
+  )
     model.fit(X_train, y_train)
 
     train_pred = model.predict_proba(X_train)[:, 1]
