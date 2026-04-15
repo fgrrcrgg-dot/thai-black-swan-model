@@ -60,7 +60,7 @@ def build_features(data):
     df['drawdown']         = (data['SET'] / rolling_max) - 1
 
     df['corr_set_hsi']     = set_ret.rolling(60).corr(hsi_ret)
-    df['autocorr_20d']     = set_ret.rolling(20).apply(lambda x: x.autocorr(lag=1), raw=False)
+    df['autocorr_60d']     = set_ret.rolling(60).apply(lambda x: x.autocorr(lag=1), raw=False)
 
     def variance_slope(x):
         if np.isnan(x).any() or len(x) < 10:
@@ -325,7 +325,7 @@ with tab3:
         'vol_of_vol':        'Volatility of volatility — instability signal',
         'drawdown':          'Distance below 252-day high',
         'corr_set_hsi':      'Correlation between SET and Hang Seng',
-        'autocorr_20d':      'Return autocorrelation (Scheffer critical slowing down)',
+        'autocorr_60d':      'Return autocorrelation (Scheffer critical slowing down)',
         'variance_trend':    'Slope of variance — Scheffer early warning signal',
         'thb_depreciation':  '60-day USD/THB change (positive = baht weakening)',
         'thb_vol':           'Thai baht volatility',
